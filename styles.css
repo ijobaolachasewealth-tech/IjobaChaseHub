@@ -207,9 +207,17 @@ label:hover ~ .custom-cursor-follower,
     background-color: var(--selective-yellow); /* Lighter orange on hover */
     transform: translateY(-2px) scale(1.02); /* Slight scale for more pop */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* More pronounced shadow */
-    text-shadow: 0 0 5px rgba(255, 183, 3, 0.7), 0 0 10px rgba(251, 133, 0, 0.5); /* Adjusted Intensified glow */
+    /* Enhanced text-shadow for a more vibrant glow on hover */
+    text-shadow: 0 0 10px rgba(255, 183, 3, 0.9), 0 0 20px rgba(251, 133, 0, 0.7);
     animation: pulse-button 1s infinite alternate; /* Pulsing effect on hover */
 }
+
+/* New: Button active (click) state */
+.btn-primary:active {
+    transform: translateY(1px) scale(0.98); /* Subtle press down effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow on press */
+}
+
 
 /* Keyframes for button pulsing glow on hover */
 @keyframes pulse-button {
@@ -262,9 +270,9 @@ label:hover ~ .custom-cursor-follower,
     100% { color: var(--selective-yellow); }
 }
 
-/* Chase/Ijoba hover effect */
+/* Chase/Ijoba hover effect - More pronounced glow */
 .animated-chase:hover, .animated-ijoba:hover {
-    text-shadow: 0 0 10px var(--ut-orange), 0 0 20px var(--selective-yellow), 0 0 30px var(--ut-orange); /* Adjusted stronger glow */
+    text-shadow: 0 0 15px var(--ut-orange), 0 0 30px var(--selective-yellow), 0 0 45px var(--ut-orange); /* More intense glow */
     transform: scale(1.05); /* Slightly larger on hover */
     cursor: pointer; /* Indicate interactivity */
 }
