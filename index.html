@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLAHUB - Digital Marketplace</title>
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Paytone One, Roboto, Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Paytone+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Hamburger Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS will go here in Codepen's CSS panel -->
+    <!-- Custom JavaScript will go here in Codepen's JS panel -->
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Custom Cursor elements -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="olahub-logo">OLAHUB</div>
+    </div>
+
+    <!-- Main Content -->
+    <header id="main-header" class="bg-white shadow-md py-4 px-6 md:px-12 flex justify-between items-center rounded-b-lg fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out">
+        <div class="header-logo text-2xl font-bold flex items-center" style="font-family: 'Paytone One', cursive; color: var(--prussian-blue);">
+            OLAHUB
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:block">
+            <ul class="flex space-x-6">
+                <li><a href="#" class="text-lg font-roboto text-gray-700 hover:text-blue-green transition-colors duration-300">Home</a></li>
+                <li><a href="#" class="text-lg font-roboto text-gray-700 hover:text-blue-green transition-colors duration-300">Products</a></li>
+                <li><a href="#" class="text-lg font-roboto text-gray-700 hover:text-blue-green transition-colors duration-300">Services</a></li>
+                <li><a href="#" class="text-lg font-roboto text-gray-700 hover:text-blue-green transition-colors duration-300">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hamburger Menu Icon for Mobile -->
+        <div class="md:hidden">
+            <button id="hamburger-menu-btn" class="text-prussian-blue text-3xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Menu (Off-canvas) -->
+    <nav id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-prussian-blue text-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-40 md:hidden">
+        <div class="flex justify-end p-6">
+            <button id="close-menu-btn" class="text-white text-3xl focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="flex flex-col items-center space-y-6 pt-10">
+            <li><a href="#" class="text-xl font-roboto text-white hover:text-sky-blue transition-colors duration-300">Home</a></li>
+            <li><a href="#" class="text-xl font-roboto text-white hover:text-sky-blue transition-colors duration-300">Products</a></li>
+            <li><a href="#" class="text-xl font-roboto text-white hover:text-sky-blue transition-colors duration-300">Services</a></li>
+            <li><a href="#" class="text-xl font-roboto text-white hover:text-sky-blue transition-colors duration-300">Contact</a></li>
+        </ul>
+        <!-- Animated Signature Placeholder -->
+        <div class="absolute bottom-6 left-0 w-full text-center px-4">
+            <p id="animated-signature" class="text-sm font-roboto text-gray-400"></p>
+        </div>
+    </nav>
+
+    <!-- Overlay for mobile menu -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-30 md:hidden"></div>
+
+    <!-- Main content needs padding-top to account for fixed header -->
+    <main class="flex-grow container mx-auto p-6 md:p-12 pt-20"> 
+        <section class="hero-section text-center py-16 relative overflow-hidden rounded-lg">
+            <div class="hero-background-gradient absolute inset-0 -z-10"></div>
+            <!-- Parallax element for subtle background movement -->
+            <div id="hero-parallax-element" class="absolute inset-0 -z-20 bg-gradient-to-br from-sky-blue to-blue-green opacity-20 filter blur-3xl rounded-lg"></div>
+
+            <h1 class="text-2xl md:text-4xl font-extrabold leading-tight mb-6 relative" style="color: var(--prussian-blue);">
+                Your Gateway to <br>
+                <!-- Added a wrapper for typewriter text to control width and prevent layout shift -->
+                <span class="typewriter-wrapper inline-block">
+                    <span id="typewriter-text" class="inline-block" style="color: var(--selective-yellow);"></span>
+                </span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 font-roboto relative" style="color: var(--blue-green);">
+                Better, Beautiful, and Classic Digital Marketplace.
+            </p>
+            <button class="btn-primary relative">Explore Our Products</button>
+        </section>
+
+        <!-- Section for "Chase" and "Ijoba" branding -->
+        <section class="my-12 text-center py-8 animate-on-scroll fade-in relative overflow-hidden">
+            <h2 class="text-xl md:text-3xl font-bold mb-4">
+                <span class="animated-chase parallax-element" data-parallax-speed="0.1">Chase</span> Your Goals with OLAHUB
+            </h2>
+            <p class="text-xl font-roboto text-gray-700">
+                The <span class="animated-ijoba parallax-element" data-parallax-speed="-0.05">Ijoba</span> of Digital Dominance.
+            </p>
+        </section>
+
+        <section class="secondary-section my-12 text-center animate-on-scroll slide-in-bottom">
+            <h2 class="text-3xl font-bold mb-4">Our Core Offerings</h2>
+            <p class="text-lg">
+                From virtual numbers to premium accounts, we've got you covered.
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll slide-in-left">
+                <h3 class="text-2xl font-paytone-one mb-3" style="color: var(--prussian-blue);">Virtual Numbers & OTPs</h3>
+                <p class="text-gray-600 font-inter">Secure and reliable virtual numbers for all your verification needs.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll fade-in delay-200">
+                <h3 class="text-2xl font-paytone-one mb-3" style="color: var(--prussian-blue);">Social Media Accounts</h3>
+                <p class="text-gray-600 font-inter">Ready-made accounts with real followers to boost your online presence.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center animate-on-scroll slide-in-right">
+                <h3 class="text-2xl font-paytone-one mb-3" style="color: var(--prussian-blue);">Premium Digital Products</h3>
+                <p class="text-gray-600 font-inter">Access to VPNs, Netflix accounts, and more for your digital lifestyle.</p>
+            </div>
+        </section>
+
+        <!-- "Why Choose Us" section - Refined for background and text visibility -->
+        <section class="why-choose-us-section my-12 py-16 rounded-lg text-center animate-on-scroll fade-in delay-400">
+            <h2 class="text-xl md:text-3xl font-bold mb-4 text-white">Why Choose OLAHUB?</h2>
+            <p class="text-lg max-w-2xl mx-auto text-white">
+                We combine cutting-edge technology with a commitment to security and customer satisfaction, providing you with seamless access to essential digital services.
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll slide-in-left delay-100">
+                <h3 class="text-2xl font-paytone-one mb-3" style="color: var(--prussian-blue);">Secure & Reliable</h3>
+                <p class="text-gray-600 font-inter">Your data and transactions are protected with industry-leading security protocols.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-on-scroll slide-in-right delay-100">
+                <h3 class="text-2xl font-paytone-one mb-3" style="color: var(--prussian-blue);">24/7 Support</h3>
+                <p class="text-gray-600 font-inter">Our dedicated support team is always here to assist you, day or night.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-prussian-blue text-muted-white py-8 px-6 md:px-12 text-center rounded-t-lg">
+        <p class="font-roboto text-sm">&copy; 2025 OLAHUB. All rights reserved. Powered by <span class="animated-chase">Chase</span></p>
+    </footer>
+
+</body>
+</html>
 
