@@ -1,1 +1,451 @@
+/* Custom CSS Variables for OLAHUB Color Palette */
+:root {
+    --sky-blue: #8ecae6;
+    --blue-green: #219ebc;
+    --prussian-blue: #023047;
+    --selective-yellow: #ffb703;
+    --ut-orange: #fb8500;
 
+    /* Muted white for 60% dominant background */
+    --muted-white: #f8f8f8; /* Slightly off-white */
+}
+
+/* Base styles using custom properties and fonts */
+body {
+    font-family: 'Inter', sans-serif; /* Default font */
+    background-color: var(--muted-white); /* 60% dominant neutral */
+    color: var(--prussian-blue); /* Dark text for readability */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    cursor: none; /* Hide default cursor */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Paytone One', cursive; /* Headings with Paytone One */
+    color: var(--prussian-blue);
+}
+
+/* Custom Cursor Styles */
+.custom-cursor,
+.custom-cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* Crucial to allow clicking elements underneath */
+    border-radius: 50%;
+    z-index: 9999; /* Ensure cursor is on top */
+}
+
+.custom-cursor {
+    width: 8px;
+    height: 8px;
+    background-color: var(--ut-orange); /* Main cursor dot color */
+    mix-blend-mode: difference; /* Makes it visible on any background */
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, transform 0.1s ease; /* Fast transition for movement */
+}
+
+.custom-cursor-follower {
+    width: 30px; /* Initial size of the follower */
+    height: 30px;
+    background-color: var(--selective-yellow); /* Follower glow color */
+    opacity: 0.3; /* Subtle transparency */
+    filter: blur(8px); /* Soft glow effect */
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, transform 0.1s ease-out; /* Slower transition for follower */
+    /* New: Subtle glowing animation for the follower */
+    animation: cursor-subtle-glow 5s infinite alternate ease-in-out;
+}
+
+/* Keyframes for subtle cursor follower glow */
+@keyframes cursor-subtle-glow {
+    0% {
+        opacity: 0.3;
+        filter: blur(8px);
+        background-color: var(--selective-yellow);
+    }
+    50% {
+        opacity: 0.4;
+        filter: blur(10px);
+        background-color: var(--ut-orange);
+    }
+    100% {
+        opacity: 0.3;
+        filter: blur(8px);
+        background-color: var(--selective-yellow);
+    }
+}
+
+
+/* Cursor morphing on interactive elements */
+a, button, input[type="submit"], input[type="button"], label, .btn-primary, .animated-chase, .animated-ijoba {
+    cursor: none; /* Hide default cursor on interactive elements as well */
+}
+
+a:hover ~ .custom-cursor,
+button:hover ~ .custom-cursor,
+input[type="submit"]:hover ~ .custom-cursor,
+input[type="button"]:hover ~ .custom-cursor,
+label:hover ~ .custom-cursor,
+.btn-primary:hover ~ .custom-cursor,
+.animated-chase:hover ~ .custom-cursor,
+.animated-ijoba:hover ~ .custom-cursor {
+    width: 25px; /* Grow main cursor */
+    height: 25px;
+    opacity: 0.5;
+    background-color: var(--selective-yellow); /* Change color on hover */
+}
+
+a:hover ~ .custom-cursor-follower,
+button:hover ~ .custom-cursor-follower,
+input[type="submit"]:hover ~ .custom-cursor-follower,
+input[type="button"]:hover ~ .custom-cursor-follower,
+label:hover ~ .custom-cursor-follower,
+.btn-primary:hover ~ .custom-cursor-follower,
+.animated-chase:hover ~ .custom-cursor-follower,
+.animated-ijoba:hover ~ .custom-cursor-follower {
+    width: 60px; /* Expand follower */
+    height: 60px;
+    opacity: 0.8;
+    filter: blur(15px); /* More blur for stronger glow */
+    background-color: var(--ut-orange); /* Change color on hover */
+    animation: none; /* Stop subtle glow, use direct hover styles */
+}
+
+
+/* Preloader Styles */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--prussian-blue); /* Dark background for preloader */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's on top */
+    transition: opacity 1s ease-out, visibility 1s ease-out;
+    opacity: 1;
+    visibility: visible;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Disable interaction once hidden */
+}
+
+.olahub-logo {
+    font-family: 'Paytone One', cursive;
+    font-size: 3rem; /* Large font size for logo */
+    color: var(--selective-yellow); /* Glowing yellow/orange */
+    text-shadow: 0 0 5px var(--ut-orange), 0 0 10px var(--selective-yellow); /* Adjusted initial glow */
+    animation:
+        glow-breathe 2s infinite alternate, /* Breathing glow */
+        roll-animation 1.5s ease-in-out infinite; /* Rolling effect */
+    display: inline-block; /* Needed for transform */
+}
+
+/* Keyframes for glowing and breathing effect (for preloader) */
+@keyframes glow-breathe {
+    0% {
+        text-shadow: 0 0 5px var(--ut-orange), 0 0 10px var(--selective-yellow), 0 0 15px var(--ut-orange); /* Adjusted glow */
+        transform: scale(1);
+    }
+    100% {
+        text-shadow: 0 0 8px var(--ut-orange), 0 0 15px var(--selective-yellow), 0 0 22px var(--ut-orange); /* Adjusted glow */
+        transform: scale(1.05);
+    }
+}
+
+/* Keyframes for rolling effect (Y-axis rotation for a subtle roll) */
+@keyframes roll-animation {
+    0% { transform: rotateY(0deg); }
+    25% { transform: rotateY(15deg); }
+    50% { transform: rotateY(0deg); }
+    75% { transform: rotateY(-15deg); }
+    100% { transform: rotateY(0deg); }
+}
+
+/* Sticky Header Styles */
+#main-header {
+    /* Fixed positioning and z-index already in HTML via Tailwind */
+    /* Initial padding/height */
+    padding-top: 1rem; /* py-4 is 1rem top/bottom */
+    padding-bottom: 1rem;
+    height: 80px; /* Example initial height */
+}
+
+#main-header.scrolled {
+    height: 60px; /* Smaller height on scroll */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* More prominent shadow on scroll */
+}
+
+#main-header .header-logo {
+    font-size: 2rem; /* Initial size */
+    transition: font-size 0.3s ease-in-out;
+}
+
+#main-header.scrolled .header-logo {
+    font-size: 1.5rem; /* Smaller size on scroll */
+}
+
+
+/* General button styling for future use - applying 10% accent color */
+.btn-primary {
+    background-color: var(--ut-orange); /* 10% accent color */
+    color: var(--muted-white);
+    font-family: 'Roboto', sans-serif;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem; /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, text-shadow 0.3s ease; /* Added text-shadow for glow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-shadow: none; /* Reset text shadow by default */
+}
+
+.btn-primary:hover {
+    background-color: var(--selective-yellow); /* Lighter orange on hover */
+    transform: translateY(-2px) scale(1.02); /* Slight scale for more pop */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* More pronounced shadow */
+    text-shadow: 0 0 5px rgba(255, 183, 3, 0.7), 0 0 10px rgba(251, 133, 0, 0.5); /* Adjusted Intensified glow */
+    animation: pulse-button 1s infinite alternate; /* Pulsing effect on hover */
+}
+
+/* Keyframes for button pulsing glow on hover */
+@keyframes pulse-button {
+    0% {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(255, 183, 3, 0.7);
+    }
+    100% {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 0 0 8px rgba(255, 183, 3, 0); /* Expand glow */
+    }
+}
+
+
+/* Example of 30% secondary color for elements */
+.secondary-section {
+    background-color: var(--blue-green); /* 30% secondary color */
+    color: var(--muted-white);
+    padding: 2rem;
+    border-radius: 0.75rem;
+}
+
+/* Branding Animations: Chase and Ijoba */
+.animated-chase, .animated-ijoba {
+    display: inline-block; /* Allows transform and text-shadow */
+    font-family: 'Paytone One', cursive; /* Ensure consistent font */
+    color: var(--selective-yellow); /* Base color for glow */
+    text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow); /* Adjusted initial subtle glow */
+    animation:
+        glow-breathe-small 3s infinite alternate, /* Breathing glow */
+        pulse-color 4s infinite alternate; /* Color pulse */
+    transition: text-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
+    font-size: inherit; /* Ensure it inherits size from parent (h2 or p) */
+}
+
+/* Smaller glow-breathe for inline text */
+@keyframes glow-breathe-small {
+    0% {
+        text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow), 0 0 9px var(--ut-orange); /* Adjusted glow */
+        transform: scale(1);
+    }
+    100% {
+        text-shadow: 0 0 5px var(--ut-orange), 0 0 10px var(--selective-yellow), 0 0 15px var(--ut-orange); /* Adjusted glow */
+        transform: scale(1.02);
+    }
+}
+
+/* Color pulse for branding words */
+@keyframes pulse-color {
+    0% { color: var(--selective-yellow); }
+    50% { color: var(--ut-orange); }
+    100% { color: var(--selective-yellow); }
+}
+
+/* Chase/Ijoba hover effect */
+.animated-chase:hover, .animated-ijoba:hover {
+    text-shadow: 0 0 10px var(--ut-orange), 0 0 20px var(--selective-yellow), 0 0 30px var(--ut-orange); /* Adjusted stronger glow */
+    transform: scale(1.05); /* Slightly larger on hover */
+    cursor: pointer; /* Indicate interactivity */
+}
+
+/* Hero Section Animated Background */
+.hero-section {
+    position: relative;
+    background-color: var(--muted-white); /* Fallback */
+    /* Ensure content is above the background */
+    z-index: 1;
+}
+
+.hero-background-gradient {
+    background: linear-gradient(
+        -45deg,
+        var(--sky-blue),
+        var(--blue-green),
+        var(--selective-yellow),
+        var(--ut-orange)
+    );
+    background-size: 400% 400%; /* Make gradient larger than container */
+    animation: gradient-shift 15s ease infinite; /* Smooth, slow shift */
+    opacity: 0.3; /* Subtle transparency */
+    filter: blur(50px); /* Soft blur effect */
+    border-radius: 0.5rem; /* Match parent rounded corners */
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+/* Scroll-Triggered Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(20px); /* Default slide-in from bottom */
+}
+
+.animate-on-scroll.fade-in {
+    transform: translateY(0); /* No vertical translation for pure fade */
+}
+
+.animate-on-scroll.slide-in-bottom {
+    transform: translateY(20px);
+}
+
+.animate-on-scroll.slide-in-left {
+    transform: translateX(-50px);
+}
+
+.animate-on-scroll.slide-in-right {
+    transform: translateX(50px);
+}
+
+/* When 'revealed' class is added by JS */
+.animate-on-scroll.revealed {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* Animation delays for staggered effects */
+.animate-on-scroll.delay-100 { transition-delay: 0.1s; }
+.animate-on-scroll.delay-200 { transition-delay: 0.2s; }
+.animate-on-scroll.delay-300 { transition-delay: 0.3s; }
+.animate-on-scroll.delay-400 { transition-delay: 0.4s; }
+/* Add more delays as needed */
+
+/* Typewriter Text Specific Glow */
+#typewriter-text {
+    /* Explicitly set font size to be smaller than h1 */
+    font-size: 1.75rem; /* Smaller than h1's new size, larger than p */
+    text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow), 0 0 9px var(--ut-orange); /* Adjusted glow */
+    animation: glow-breathe-small 3s infinite alternate; /* Reuse existing glow animation */
+}
+
+/* Typewriter Wrapper to prevent layout shift */
+.typewriter-wrapper {
+    /* Adjusted min-width based on new font size */
+    min-width: 600px; /* Calculated for 'Premium Streaming Logs' at 1.75rem */
+    display: inline-block; /* Essential for min-width to work */
+    vertical-align: middle; /* Align with surrounding text */
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em; /* Adjust to match font size */
+    background-color: var(--ut-orange); /* Cursor color - should be visible */
+    animation: blink-caret 0.75s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+/* Blinking cursor animation */
+@keyframes blink-caret {
+    from, to { background-color: transparent; }
+    50% { background-color: var(--ut-orange); }
+}
+
+/* Specific styling for the "Why Choose Us" section */
+.why-choose-us-section {
+    background-color: var(--blue-green); /* Ensure this background is applied */
+    color: var(--muted-white); /* Ensure text color is white for contrast */
+    /* Add any other specific styles here if needed, e.g., padding, rounded corners etc. */
+}
+
+
+/* Mobile Menu Styles */
+#mobile-menu {
+    /* Tailwind classes handle initial transform and transition */
+    /* Add specific styles for the menu itself */
+    padding-top: 4rem; /* Space for close button */
+}
+
+#mobile-menu.open {
+    transform: translateX(0); /* Slide in */
+}
+
+#mobile-menu-overlay.active {
+    opacity: 0.5;
+    pointer-events: auto; /* Enable interaction to close menu */
+}
+
+/* Animated Signature Styles */
+#animated-signature {
+    font-size: 0.85rem; /* Slightly reduced size */
+    transition: opacity 0.5s ease-out, text-shadow 0.5s ease; /* For fade-in after typing and smooth glow */
+    text-shadow: none; /* Default state for glow */
+    opacity: 1; /* Ensure it's visible by default when menu is open */
+}
+
+/* Class added by JS after typing for glowing effect */
+#animated-signature.signature-glowing {
+    text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow), 0 0 9px var(--ut-orange); /* Adjusted glow */
+    animation: glow-breathe-small 3s infinite alternate, pulse-color 4s infinite alternate;
+}
+
+
+/* Footer specific overrides for animated-chase */
+footer .animated-chase {
+    font-size: 1.1rem; /* Smaller size for footer, adjusted from default animated-chase */
+    /* Ensure glow and pulse still work well at this size */
+    text-shadow: 0 0 2px var(--ut-orange), 0 0 4px var(--selective-yellow), 0 0 6px var(--ut-orange); /* Adjusted glow */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .olahub-logo {
+        font-size: 2rem; /* Smaller logo on mobile */
+    }
+    /* Adjusted h1 size for mobile */
+    h1.text-2xl { /* Target the h1 specifically */
+        font-size: 1.5rem; /* Equivalent to Tailwind's text-2xl */
+    }
+    /* Adjusted h2 size for mobile (already text-xl) */
+    h2.text-xl {
+        font-size: 1.25rem; /* Equivalent to Tailwind's text-xl */
+    }
+
+    #typewriter-text {
+        font-size: 1.125rem; /* Smaller for mobile, equivalent to text-lg */
+    }
+
+    .animated-chase, .animated-ijoba {
+        /* Ensure these inherit from their parent elements (h2 and p) */
+        font-size: inherit; /* This is the key change */
+    }
+    /* Adjust typewriter wrapper for smaller screens */
+    .typewriter-wrapper {
+        min-width: 350px; /* Adjusted for mobile, based on new font size */
+    }
+    footer .animated-chase {
+        font-size: 0.9rem; /* Even smaller for mobile footer */
+        text-shadow: 0 0 1px var(--ut-orange), 0 0 2px var(--selective-yellow), 0 0 3px var(--ut-orange); /* Adjusted glow */
+    }
+    #animated-signature {
+        font-size: 0.75rem; /* Even smaller for mobile signature */
+        text-shadow: 0 0 2px var(--ut-orange), 0 0 4px var(--selective-yellow), 0 0 6px var(--ut-orange); /* Adjusted glow */
+    }
+}
