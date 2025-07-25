@@ -1,459 +1,437 @@
-/* Custom CSS Variables for OLAHUB Color Palette */
+/* Custom CSS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Paytone+One&family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Color Variables */
 :root {
     --sky-blue: #8ecae6;
     --blue-green: #219ebc;
     --prussian-blue: #023047;
     --selective-yellow: #ffb703;
     --ut-orange: #fb8500;
-
-    /* Muted white for 60% dominant background */
-    --muted-white: #f8f8f8; /* Slightly off-white */
+    --muted-white: #f5f5f5; /* For header and some sections */
+    --text-color-light: #fefefe;
+    --text-color-dark: #333;
 }
 
-/* Base styles using custom properties and fonts */
+/* Base Styles */
 body {
-    font-family: 'Inter', sans-serif; /* Default font */
-    background-color: var(--muted-white); /* 60% dominant neutral */
-    color: var(--prussian-blue); /* Dark text for readability */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    cursor: none; /* Hide default cursor */
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color-dark);
+    background-color: var(--prussian-blue); /* Dark background for overall site */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Paytone One', cursive; /* Headings with Paytone One */
-    color: var(--prussian-blue);
-}
-
-/* Custom Cursor Styles */
-.custom-cursor,
-.custom-cursor-follower {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none; /* Crucial to allow clicking elements underneath */
-    border-radius: 50%;
-    z-index: 9999; /* Ensure cursor is on top */
-}
-
+/* Custom Cursor */
 .custom-cursor {
-    width: 8px;
-    height: 8px;
-    background-color: var(--ut-orange); /* Main cursor dot color */
-    mix-blend-mode: difference; /* Makes it visible on any background */
-    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, transform 0.1s ease; /* Fast transition for movement */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--selective-yellow);
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+    mix-blend-mode: difference; /* Blends with background for a cool effect */
+    opacity: 0.8;
 }
 
 .custom-cursor-follower {
-    width: 30px; /* Initial size of the follower */
-    height: 30px;
-    background-color: var(--selective-yellow); /* Follower glow color */
-    opacity: 0.3; /* Subtle transparency */
-    filter: blur(8px); /* Soft glow effect */
-    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, transform 0.1s ease-out; /* Slower transition for follower */
-    /* New: Subtle glowing animation for the follower */
-    animation: cursor-subtle-glow 5s infinite alternate ease-in-out;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--ut-orange);
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.6;
 }
 
-/* Keyframes for subtle cursor follower glow */
-@keyframes cursor-subtle-glow {
-    0% {
-        opacity: 0.3;
-        filter: blur(8px);
-        background-color: var(--selective-yellow);
-    }
-    50% {
-        opacity: 0.4;
-        filter: blur(10px);
-        background-color: var(--ut-orange);
-    }
-    100% {
-        opacity: 0.3;
-        filter: blur(8px);
-        background-color: var(--selective-yellow);
-    }
-}
-
-
-/* Cursor morphing on interactive elements */
-a, button, input[type="submit"], input[type="button"], label, .btn-primary, .animated-chase, .animated-ijoba {
-    cursor: none; /* Hide default cursor on interactive elements as well */
-}
-
+/* Cursor effects on hover */
 a:hover ~ .custom-cursor,
 button:hover ~ .custom-cursor,
-input[type="submit"]:hover ~ .custom-cursor,
-input[type="button"]:hover ~ .custom-cursor,
-label:hover ~ .custom-cursor,
 .btn-primary:hover ~ .custom-cursor,
-.animated-chase:hover ~ .custom-cursor,
-.animated-ijoba:hover ~ .custom-cursor {
-    width: 25px; /* Grow main cursor */
-    height: 25px;
-    opacity: 0.5;
-    background-color: var(--selective-yellow); /* Change color on hover */
+.btn-primary-small:hover ~ .custom-cursor,
+.service-card:hover ~ .custom-cursor,
+.counter-item:hover ~ .custom-cursor {
+    width: 30px;
+    height: 30px;
+    background-color: var(--ut-orange);
+    opacity: 1;
 }
 
 a:hover ~ .custom-cursor-follower,
 button:hover ~ .custom-cursor-follower,
-input[type="submit"]:hover ~ .custom-cursor-follower,
-input[type="button"]:hover ~ .custom-cursor-follower,
-label:hover ~ .custom-cursor-follower,
 .btn-primary:hover ~ .custom-cursor-follower,
-.animated-chase:hover ~ .custom-cursor-follower,
-.animated-ijoba:hover ~ .custom-cursor-follower {
-    width: 60px; /* Expand follower */
+.btn-primary-small:hover ~ .custom-cursor-follower,
+.service-card:hover ~ .custom-cursor-follower,
+.counter-item:hover ~ .custom-cursor-follower {
+    width: 60px;
     height: 60px;
-    opacity: 0.8;
-    filter: blur(15px); /* More blur for stronger glow */
-    background-color: var(--ut-orange); /* Change color on hover */
-    animation: none; /* Stop subtle glow, use direct hover styles */
+    border-color: var(--selective-yellow);
+    opacity: 1;
+}
+
+/* Hide custom cursor on mobile */
+@media (max-width: 768px) {
+    .custom-cursor,
+    .custom-cursor-follower {
+        display: none !important;
+    }
 }
 
 
-/* Preloader Styles */
+/* Preloader */
 #preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--prussian-blue); /* Dark background for preloader */
+    background: linear-gradient(135deg, var(--prussian-blue) 0%, #001f3f 100%); /* Darker gradient */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Ensure it's on top */
-    transition: opacity 1s ease-out, visibility 1s ease-out;
-    opacity: 1;
+    z-index: 10000;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+    opacity: 1; /* Starts visible */
     visibility: visible;
 }
 
 #preloader.hidden {
     opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* Disable interaction once hidden */
+    visibility: hidden; /* Hides it */
 }
 
-.olahub-logo {
-    font-family: 'Paytone One', cursive;
-    font-size: 3rem; /* Large font size for logo */
-    color: var(--selective-yellow); /* Glowing yellow/orange */
-    text-shadow: 0 0 5px var(--ut-orange), 0 0 10px var(--selective-yellow); /* Adjusted initial glow */
-    animation:
-        glow-breathe 2s infinite alternate, /* Breathing glow */
-        roll-animation 1.5s ease-in-out infinite; /* Rolling effect */
-    display: inline-block; /* Needed for transform */
+.preloader-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Keyframes for glowing and breathing effect (for preloader) */
-@keyframes glow-breathe {
+.preloader-logo img {
+    animation: bounceAndGlow 2s infinite alternate ease-in-out;
+}
+
+@keyframes bounceAndGlow {
     0% {
-        text-shadow: 0 0 5px var(--ut-orange), 0 0 10px var(--selective-yellow), 0 0 15px var(--ut-orange); /* Adjusted glow */
-        transform: scale(1);
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 5px rgba(255, 183, 3, 0.5));
+    }
+    50% {
+        transform: translateY(-20px) scale(1.05);
+        filter: drop-shadow(0 0 15px rgba(255, 183, 3, 0.8));
     }
     100% {
-        text-shadow: 0 0 8px var(--ut-orange), 0 0 15px var(--selective-yellow), 0 0 22px var(--ut-orange); /* Adjusted glow */
-        transform: scale(1.05);
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 5px rgba(255, 183, 3, 0.5));
     }
 }
 
-/* Keyframes for rolling effect (Y-axis rotation for a subtle roll) */
-@keyframes roll-animation {
-    0% { transform: rotateY(0deg); }
-    25% { transform: rotateY(15deg); }
-    50% { transform: rotateY(0deg); }
-    75% { transform: rotateY(-15deg); }
-    100% { transform: rotateY(0deg); }
-}
 
-/* Sticky Header Styles */
+/* Header */
 #main-header {
-    /* Fixed positioning and z-index already in HTML via Tailwind */
-    /* Initial padding/height */
-    padding-top: 1rem; /* py-4 is 1rem top/bottom */
-    padding-bottom: 1rem;
-    height: 80px; /* Example initial height */
+    background-color: var(--muted-white); /* Lighter background for header */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
 
 #main-header.scrolled {
-    height: 60px; /* Smaller height on scroll */
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* More prominent shadow on scroll */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-#main-header .header-logo {
-    font-size: 2rem; /* Initial size */
-    transition: font-size 0.3s ease-in-out;
+.header-logo {
+    color: var(--prussian-blue);
 }
 
-#main-header.scrolled .header-logo {
-    font-size: 1.5rem; /* Smaller size on scroll */
+/* Mobile Menu */
+#mobile-menu {
+    background-color: var(--prussian-blue);
 }
 
+#mobile-menu-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
-/* General button styling for future use - applying 10% accent color */
+/* Buttons */
 .btn-primary {
-    background-color: var(--ut-orange); /* 10% accent color */
-    color: var(--muted-white);
-    font-family: 'Roboto', sans-serif;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem; /* Rounded corners */
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, text-shadow 0.3s ease; /* Added text-shadow for glow */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-shadow: none; /* Reset text shadow by default */
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background-color: var(--ut-orange);
+    color: white;
+    font-weight: bold;
+    border-radius: 9999px; /* Tailwind's rounded-full */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(251, 133, 0, 0.3);
+    text-decoration: none; /* Ensure no underline */
 }
 
 .btn-primary:hover {
-    background-color: var(--selective-yellow); /* Lighter orange on hover */
-    transform: translateY(-2px) scale(1.02); /* Slight scale for more pop */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* More pronounced shadow */
-    /* Enhanced text-shadow for a more vibrant glow on hover */
-    text-shadow: 0 0 10px rgba(255, 183, 3, 0.9), 0 0 20px rgba(251, 133, 0, 0.7);
-    animation: pulse-button 1s infinite alternate; /* Pulsing effect on hover */
+    background-color: var(--selective-yellow);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 183, 3, 0.5);
 }
 
-/* New: Button active (click) state */
-.btn-primary:active {
-    transform: translateY(1px) scale(0.98); /* Subtle press down effect */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow on press */
+.btn-primary-small {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 9999px;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-
-/* Keyframes for button pulsing glow on hover */
-@keyframes pulse-button {
-    0% {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 0 0 0 rgba(255, 183, 3, 0.7);
-    }
-    100% {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25), 0 0 0 8px rgba(255, 183, 3, 0); /* Expand glow */
-    }
+.btn-primary-small:hover {
+    transform: translateY(-2px);
 }
 
-
-/* Example of 30% secondary color for elements */
-.secondary-section {
-    background-color: var(--blue-green); /* 30% secondary color */
-    color: var(--muted-white);
-    padding: 2rem;
-    border-radius: 0.75rem;
-}
-
-/* Branding Animations: Chase and Ijoba */
-.animated-chase, .animated-ijoba {
-    display: inline-block; /* Allows transform and text-shadow */
-    font-family: 'Paytone One', cursive; /* Ensure consistent font */
-    color: var(--selective-yellow); /* Base color for glow */
-    text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow); /* Adjusted initial subtle glow */
-    animation:
-        glow-breathe-small 3s infinite alternate, /* Breathing glow */
-        pulse-color 4s infinite alternate; /* Color pulse */
-    transition: text-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for hover */
-    font-size: inherit; /* Ensure it inherits size from parent (h2 or p) */
-}
-
-/* Smaller glow-breathe for inline text */
-@keyframes glow-breathe-small {
-    0% {
-        text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow), 0 0 9px var(--ut-orange); /* Adjusted glow */
-        transform: scale(1);
-    }
-    100% {
-        text-shadow: 0 0 5px var(--ut-orange), 0 0 10px var(--selective-yellow), 0 0 15px var(--ut-orange); /* Adjusted glow */
-        transform: scale(1.02);
-    }
-}
-
-/* Color pulse for branding words */
-@keyframes pulse-color {
-    0% { color: var(--selective-yellow); }
-    50% { color: var(--ut-orange); }
-    100% { color: var(--selective-yellow); }
-}
-
-/* Chase/Ijoba hover effect - More pronounced glow */
-.animated-chase:hover, .animated-ijoba:hover {
-    text-shadow: 0 0 15px var(--ut-orange), 0 0 30px var(--selective-yellow), 0 0 45px var(--ut-orange); /* More intense glow */
-    transform: scale(1.05); /* Slightly larger on hover */
-    cursor: pointer; /* Indicate interactivity */
-}
-
-/* Hero Section Animated Background */
+/* Sections */
 .hero-section {
+    background-color: var(--prussian-blue); /* Dark background for hero */
+    color: white;
+    padding-top: 10rem; /* Adjust for fixed header */
+    padding-bottom: 5rem;
+    min-height: 100vh;
     position: relative;
-    background-color: var(--muted-white); /* Fallback */
-    /* Ensure content is above the background */
-    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
+/* Updated Hero Background Gradient & Animation (More distinct colors, more glow) */
 .hero-background-gradient {
-    background: linear-gradient(
-        -45deg,
-        var(--sky-blue),
-        var(--blue-green),
-        var(--selective-yellow),
-        var(--ut-orange)
-    );
-    background-size: 400% 400%; /* Make gradient larger than container */
-    animation: gradient-shift 15s ease infinite; /* Smooth, slow shift */
-    opacity: 0.3; /* Subtle transparency */
-    filter: blur(50px); /* Soft blur effect */
-    border-radius: 0.5rem; /* Match parent rounded corners */
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 15% 25%, var(--sky-blue) 0%, transparent 60%),
+        radial-gradient(circle at 85% 75%, var(--ut-orange) 0%, transparent 60%),
+        radial-gradient(circle at 40% 60%, var(--blue-green) 0%, transparent 60%),
+        radial-gradient(circle at 70% 10%, var(--selective-yellow) 0%, transparent 60%); /* Added fourth gradient */
+    background-size: 200% 200%;
+    opacity: 0.6; /* Slightly higher base opacity */
+    z-index: -1;
+    animation: multiColorGlow 18s infinite alternate ease-in-out; /* Slightly slower for smoother transitions */
 }
 
-@keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes multiColorGlow {
+    0% { background-position: 0% 0%; opacity: 0.6; filter: blur(0px); }
+    25% { background-position: 50% 25%; opacity: 0.7; filter: blur(1px); }
+    50% { background-position: 100% 50%; opacity: 0.6; filter: blur(0px); }
+    75% { background-position: 50% 75%; opacity: 0.7; filter: blur(1px); }
+    100% { background-position: 0% 100%; opacity: 0.6; filter: blur(0px); }
 }
 
 
-/* Scroll-Triggered Animations */
+/* Typewriter Effect (hero-dynamic-text now uses breatheGlowSubtle) */
+.typewriter-wrapper {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: bottom;
+    border-right: 3px solid transparent; /* Cursor */
+    animation: blink-caret 0.75s step-end infinite; /* Only blink cursor here, typing is JS controlled */
+}
+
+/* Hero text glow - now applies breatheGlowSubtle animation */
+.hero-text-glow {
+    animation: breatheGlowSubtle 3s ease-in-out infinite alternate;
+}
+
+
+/* Animations */
+/* Animated Words (Chase, Ijoba) - Now VERY Toned Down */
+.animated-chase, .animated-ijoba {
+    display: inline-block; /* Essential for transforms */
+    font-family: 'Paytone One', cursive; /* Apply the font */
+    transition: all 0.5s ease-in-out;
+}
+
+.animated-chase {
+    color: var(--selective-yellow);
+    animation: breatheGlowSubtle 3s ease-in-out infinite alternate;
+}
+
+.animated-ijoba {
+    color: var(--ut-orange); /* Or another distinct color */
+    animation: breatheGlowSubtle 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes breatheGlowSubtle {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 1px var(--selective-yellow), 0 0 2px var(--selective-yellow); /* Much less intense */
+    }
+    50% {
+        transform: scale(1.005); /* Very subtle scale */
+        text-shadow: 0 0 4px var(--selective-yellow), 0 0 8px var(--selective-yellow), 0 0 12px rgba(255, 183, 3, 0.3); /* Very moderate, soft glow */
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 1px var(--selective-yellow), 0 0 2px var(--selective-yellow);
+    }
+}
+
+
+/* Scroll Animations */
 .animate-on-scroll {
     opacity: 0;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    transform: translateY(20px); /* Default slide-in from bottom */
-}
-
-.animate-on-scroll.fade-in {
-    transform: translateY(0); /* No vertical translation for pure fade */
-}
-
-.animate-on-scroll.slide-in-bottom {
     transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.animate-on-scroll.slide-in-left {
-    transform: translateX(-50px);
-}
-
-.animate-on-scroll.slide-in-right {
-    transform: translateX(50px);
-}
-
-/* When 'revealed' class is added by JS */
-.animate-on-scroll.revealed {
+.animate-on-scroll.animated {
     opacity: 1;
-    transform: translate(0, 0);
+    transform: translateY(0);
 }
 
-/* Animation delays for staggered effects */
-.animate-on-scroll.delay-100 { transition-delay: 0.1s; }
-.animate-on-scroll.delay-200 { transition-delay: 0.2s; }
-.animate-on-scroll.delay-300 { transition-delay: 0.3s; }
-.animate-on-scroll.delay-400 { transition-delay: 0.4s; }
-/* Add more delays as needed */
-
-/* Typewriter Text Specific Glow */
-#typewriter-text {
-    /* Explicitly set font size to be smaller than h1 */
-    font-size: 1.75rem; /* Smaller than h1's new size, larger than p */
-    text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow), 0 0 9px var(--ut-orange); /* Adjusted glow */
-    animation: glow-breathe-small 3s infinite alternate; /* Reuse existing glow animation */
+/* Specific scroll animations */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+.fade-in.animated {
+    opacity: 1;
 }
 
-/* Typewriter Wrapper to prevent layout shift */
-.typewriter-wrapper {
-    /* Adjusted min-width based on new font size */
-    min-width: 600px; /* Calculated for 'Premium Streaming Logs' at 1.75rem */
-    display: inline-block; /* Essential for min-width to work */
-    vertical-align: middle; /* Align with surrounding text */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fade-in-up.animated {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Typewriter Cursor */
-.typewriter-cursor {
-    display: inline-block;
-    width: 3px;
-    height: 1.2em; /* Adjust to match font size */
-    background-color: var(--ut-orange); /* Cursor color - should be visible */
-    animation: blink-caret 0.75s step-end infinite;
-    vertical-align: middle;
-    margin-left: 2px;
+.slide-in-bottom {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.slide-in-bottom.animated {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Blinking cursor animation */
-@keyframes blink-caret {
-    from, to { background-color: transparent; }
-    50% { background-color: var(--ut-orange); }
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.slide-in-left.animated {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-/* Specific styling for the "Why Choose Us" section */
-.why-choose-us-section {
-    background-color: var(--blue-green); /* Ensure this background is applied */
-    color: var(--muted-white); /* Ensure text color is white for contrast */
-    /* Add any other specific styles here if needed, e.g., padding, rounded corners etc. */
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.slide-in-right.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Delay for staggered animations */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+
+
+/* Counter Section */
+.counter-section {
+    background: linear-gradient(135deg, var(--blue-green) 0%, var(--prussian-blue) 100%); /* Dark gradient */
+    border-radius: 1rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    color: white; /* Ensure base text is white */
+}
+/* Explicitly set color for all children elements in dark sections */
+.counter-section h2, .counter-section h3, .counter-section p, .counter-section div, .counter-section span {
+    color: white;
+}
+
+.counter-item {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white for items */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.counter-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Secondary section (services) */
+.secondary-section {
+    background-color: var(--prussian-blue);
+    color: var(--text-color-light); /* Ensure base text is white */
+    border-radius: 1rem;
+    padding: 4rem 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+/* Explicitly set color for all children elements in dark sections */
+.secondary-section h2, .secondary-section h3, .secondary-section p, .secondary-section span {
+    color: var(--text-color-light);
 }
 
 
-/* Mobile Menu Styles */
-#mobile-menu {
-    /* Tailwind classes handle initial transform and transition */
-    /* Add specific styles for the menu itself */
-    padding-top: 4rem; /* Space for close button */
+/* Footer */
+footer {
+    background-color: var(--prussian-blue);
+    color: var(--muted-white);
+    margin-top: auto; /* Pushes footer to the bottom */
 }
 
-#mobile-menu.open {
-    transform: translateX(0); /* Slide in */
+/* General Link Hover Effect */
+a {
+    text-decoration: none;
 }
 
-#mobile-menu-overlay.active {
-    opacity: 0.5;
-    pointer-events: auto; /* Enable interaction to close menu */
+.mobile-nav-link,
+.main-nav-link {
+    position: relative;
+    padding-bottom: 2px; /* Space for underline */
 }
 
-/* Animated Signature Styles */
-#animated-signature {
-    font-size: 0.85rem; /* Slightly reduced size */
-    transition: opacity 0.5s ease-out, text-shadow 0.5s ease; /* For fade-in after typing and smooth glow */
-    text-shadow: none; /* Default state for glow */
-    opacity: 1; /* Ensure it's visible by default when menu is open */
+.mobile-nav-link::after,
+.main-nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--ut-orange); /* Or your accent color */
+    transition: width 0.3s ease-out;
 }
 
-/* Class added by JS after typing for glowing effect */
-#animated-signature.signature-glowing {
-    text-shadow: 0 0 3px var(--ut-orange), 0 0 6px var(--selective-yellow), 0 0 9px var(--ut-orange); /* Adjusted glow */
-    animation: glow-breathe-small 3s infinite alternate, pulse-color 4s infinite alternate;
+.mobile-nav-link:hover::after,
+.main-nav-link:hover::after {
+    width: 100%;
 }
 
-
-/* Footer specific overrides for animated-chase */
-footer .animated-chase {
-    font-size: 1.1rem; /* Smaller size for footer, adjusted from default animated-chase */
-    /* Ensure glow and pulse still work well at this size */
-    text-shadow: 0 0 2px var(--ut-orange), 0 0 4px var(--selective-yellow), 0 0 6px var(--ut-orange); /* Adjusted glow */
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-    .olahub-logo {
-        font-size: 2rem; /* Smaller logo on mobile */
-    }
-    /* Adjusted h1 size for mobile */
-    h1.text-2xl { /* Target the h1 specifically */
-        font-size: 1.5rem; /* Equivalent to Tailwind's text-2xl */
-    }
-    /* Adjusted h2 size for mobile (already text-xl) */
-    h2.text-xl {
-        font-size: 1.25rem; /* Equivalent to Tailwind's text-xl */
-    }
-
-    #typewriter-text {
-        font-size: 1.125rem; /* Smaller for mobile, equivalent to text-lg */
-    }
-
-    .animated-chase, .animated-ijoba {
-        /* Ensure these inherit from their parent elements (h2 and p) */
-        font-size: inherit; /* This is the key change */
-    }
-    /* Adjust typewriter wrapper for smaller screens */
-    .typewriter-wrapper {
-        min-width: 350px; /* Adjusted for mobile, based on new font size */
-    }
-    footer .animated-chase {
-        font-size: 0.9rem; /* Even smaller for mobile footer */
-        text-shadow: 0 0 1px var(--ut-orange), 0 0 2px var(--selective-yellow), 0 0 3px var(--ut-orange); /* Adjusted glow */
-    }
-    #animated-signature {
-        font-size: 0.75rem; /* Even smaller for mobile signature */
-        text-shadow: 0 0 2px var(--ut-orange), 0 0 4px var(--selective-yellow), 0 0 6px var(--ut-orange); /* Adjusted glow */
-    }
+/* Other general styles */
+.container {
+    max-width: 1200px;
 }
